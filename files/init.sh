@@ -20,6 +20,12 @@ if [[ ${uid} -eq 0 ]]; then
     chown -R app:app /srv /home/app
 fi
 
+# set password for user app
+if [ ! -z "$APP_PASSWORD" ]; then
+    echo "$APP_USER:$APP_PASSWORD" | chpasswd
+    echo "Password for $APP_USER has been set"
+fi
+
 
 if [[ -f "/srv/init.sh" ]]; then
     echo "execute /srv/init.sh"
